@@ -2,6 +2,7 @@ import blaze
 
 while True:
     text = input("blaze > ")
+    text = text.strip()
     if text == "!exit":
         break
 
@@ -10,4 +11,4 @@ while True:
     if error:
         print(error.as_string())
     else:
-        print(result)
+        print("fetch < " + (result.__repr__()))
