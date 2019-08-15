@@ -1,5 +1,5 @@
-expr          : KEYWORD:VAR IDENTIFIER (COMMA IDENTIFIER)* EQ expr
-              : term ((PLUS|MINUS) term)*
+expr          : term ((PLUS|MINUS) term)*
+              : (KEYWORD:var)? IDENTIFIER EQ expr
 
 term          : factor ((MUL|DIV) factor)*
 
