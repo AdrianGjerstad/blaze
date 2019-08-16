@@ -23,7 +23,7 @@ if-expr       : KEYWORD:if expr COLON expr
                 (KEYWORD:else KEYWORD:if expr COLON expr)*
                 (KEYWORD:else expr)?
 
-for-expr      : KEYWORD:for ((KEYWORD:var)? IDENTIFIER EQ expr)? COLON
-                (comp-expr)? COLON (expr)? COLON expr
+for-expr      : KEYWORD:for IDENTIFIER EQ expr KEYWORD:to
+                expr (KEYWORD:step expr)? COLON expr
 
 while-expr    : KEYWORD:while comp-expr COLON expr
