@@ -1,5 +1,10 @@
-expr          : term ((PLUS|MINUS) term)*
-              : (KEYWORD:var)? IDENTIFIER EQ expr
+expr          : KEYWORD:var? IDENTIFIER EQ expr
+              : comp-expr ((KEYWORD:and|KEYWORD:or) comp-expr)*
+
+comp-expr     : NOT comp-expr
+              : arith-expr ((EE|NE|LT|GT|LE|GE) arith-expr)*
+
+arith-expr    : term ((PLUS|MINUS) term)*
 
 term          : factor ((MUL|DIV) factor)*
 
@@ -10,3 +15,15 @@ power         : unit (POW factor)*
 
 unit          : INT|FLOAT|IDENTIFIER
               : LPAREN expr RPAREN
+              : if-expr
+              : for-expr
+              : while-expr
+
+if-expr       : KEYWORD:if expr COLON expr
+                (KEYWORD:else KEYWORD:if expr COLON expr)*
+                (KEYWORD:else expr)?
+
+for-expr      : KEYWORD:for ((KEYWORD:var)? IDENTIFIER EQ expr)? COLON
+                (comp-expr)? COLON (expr)? COLON expr
+
+while-expr    : KEYWORD:while comp-expr COLON expr

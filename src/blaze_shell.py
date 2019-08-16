@@ -10,5 +10,5 @@ while True:
 
     if error:
         print(error.as_string())
-    else:
+    elif result:
         print("fetch < " + (result.__repr__()))
